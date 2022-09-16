@@ -3,13 +3,12 @@ library(tidyverse)
 library(ggrepel)
 
 
-person_2020 <- read_csv("Z:/ZW_R_DICT/Animated_plot/traffic_data/FARS2020NationalCSV/person.csv")
+person_2020 <- read_csv("~/FARS2020NationalCSV/person.csv")
 
 View(person_2020)
 
 person_2020%>%
   select(STATENAME,ST_CASE,VEH_NO,VPICMAKENAME,VPICMODELNAME,AGE,SEX,INJ_SEVNAME)%>%
-  #group_by(INJ_SEVNAME)%>%count()
   filter(INJ_SEVNAME %in% c('Suspected Serious Injury (A)','Fatal Injury (K)'))%>%
   distinct(ST_CASE,VEH_NO,.keep_all=TRUE)%>%
   select(STATENAME,ST_CASE,VEH_NO,VPICMAKENAME,VPICMODELNAME)%>%
